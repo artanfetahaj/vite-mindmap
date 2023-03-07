@@ -1,21 +1,11 @@
 <template>
   <div :class="style['container']" v-show="show" ref="containerEle">
     <div @mousedown="close"></div>
-    <div
-      ref="menuEle"
-      :id="style['menu']"
-      :style="{ top: pos.top+'px', left: pos.left+'px' }"
-    >
-      <ul 
-        v-for="(group, index) in groups"
-        :key="index"
-      >
-        <li
-          :class="item.disabled ? style['disabled'] : ''"
-          v-for="item in group"
-          :key="item.name"
-          @click="onClick(item.name)"
-        >{{ i18n.t(`contextmenu.${item.name}`) }}</li>
+    <div ref="menuEle" :id="style['menu']" :style="{ top: pos.top + 'px', left: pos.left + 'px' }">
+      <ul v-for="(group, index) in groups" :key="index">
+        <li :class="item.disabled ? style['disabled'] : ''" v-for="item in group" :key="item.name"
+          @click="onClick(item.name)">{{ i18n.t(`contextmenu.${item.name}`) }}
+        </li>
       </ul>
     </div>
   </div>
@@ -36,7 +26,7 @@ export default defineComponent({
     groups: Array as PropType<MenuItem[][]>
   },
   emits: ['click-item'],
-  setup (props, context) {
+  setup(props, context) {
     const show = ref(false)
     const style = useCssModule()
     const containerEle: Ref<HTMLDivElement | undefined> = ref()
@@ -75,73 +65,73 @@ export default defineComponent({
 </script>
 
 <style lang="scss" module>
-  .container {
-    position: absolute;
-    left: 0;
-    top: 0;
-    right: 0;
-    bottom: 0;
+.container {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
 
-    > div:first-child {
-      width: 100%;
-      height: 100%;
-    }
+  >div:first-child {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+#menu {
+  position: absolute;
+  border-radius: 4px;
+  box-shadow: 0 5px 5px -3px rgb(0 0 0 / 20%), 0 8px 10px 1px rgb(0 0 0 / 14%), 0 3px 14px 2px rgb(0 0 0 / 12%);
+  padding: 4px 4px;
+  background-color: #eae9ed;
+  color: #3a353d;
+  font-weight: bold;
+  font-size: small;
+  white-space: nowrap;
+}
+
+#menu ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  border-radius: inherit;
+
+  &:not(:last-child)::after {
+    display: block;
+    content: '';
+    background-color: #CBCBCB;
+    height: 1px;
+    margin: 4px 10px;
   }
 
-  #menu {
-    position: absolute;
-    border-radius: 4px;
-    box-shadow: 0 5px 5px -3px rgb(0 0 0 / 20%), 0 8px 10px 1px rgb(0 0 0 / 14%), 0 3px 14px 2px rgb(0 0 0 / 12%);
-    padding: 4px 4px;
-    background-color: #eae9ed;
-    color: #3a353d;
-    font-weight: bold;
-    font-size: small;
-    white-space: nowrap;
-  }
-
-  #menu ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
+  li {
+    position: relative;
+    padding: 2px 10px;
+    cursor: pointer;
     border-radius: inherit;
 
-    &:not(:last-child)::after {
-      display: block;
-      content: '';
-      background-color: #CBCBCB;
-      height: 1px;
-      margin: 4px 10px;
+    &::before {
+      border-radius: inherit;
+      background-color: black;
+      bottom: 0;
+      content: "";
+      left: 0;
+      opacity: 0;
+      pointer-events: none;
+      position: absolute;
+      right: 0;
+      top: 0;
+      transition: 0.3s cubic-bezier(0.25, 0.8, 0.5, 1);
     }
 
-    li {
-      position: relative;
-      padding: 2px 10px;
-      cursor: pointer;
-      border-radius: inherit;
+    &:not(.disabled):hover::before {
+      opacity: 0.09;
+    }
 
-      &::before {
-        border-radius: inherit;
-        background-color: black;
-        bottom: 0;
-        content: "";
-        left: 0;
-        opacity: 0;
-        pointer-events: none;
-        position: absolute;
-        right: 0;
-        top: 0;
-        transition: 0.3s cubic-bezier(0.25, 0.8, 0.5, 1);
-      }
-
-      &:not(.disabled):hover::before {
-        opacity: 0.09;
-      }
-
-      &.disabled {
-        color: #AEB2B5;
-        pointer-events: none;
-      }
+    &.disabled {
+      color: #AEB2B5;
+      pointer-events: none;
     }
   }
+}
 </style>

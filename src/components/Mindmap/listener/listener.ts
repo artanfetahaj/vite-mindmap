@@ -12,7 +12,7 @@ import { MenuEvent } from '../variable/contextmenu'
 /**
  * @param this - gContent
  */
-export function onMouseEnter (this: SVGGElement): void {
+export function onMouseEnter(this: SVGGElement): void {
   const temp = this.querySelector<HTMLElement>(`g.${style['add-btn']}`)
   if (temp) { temp.style.opacity = '1' }
 }
@@ -20,7 +20,7 @@ export function onMouseEnter (this: SVGGElement): void {
 /**
  * @param this - gContent
  */
-export function onMouseLeave (this: SVGGElement): void {
+export function onMouseLeave(this: SVGGElement): void {
   const temp = this.querySelector<HTMLElement>(`g.${style['add-btn']}`)
   if (temp) { temp.style.opacity = '0' }
 }
@@ -35,13 +35,14 @@ export const onZoomMove = (e: d3.D3ZoomEvent<SVGSVGElement, null>): void => {
 export const onSelect = (e: MouseEvent, d: Mdata): void => {
   e.stopPropagation()
   selectGNode(d)
+  emitter.emit('select', d)
 }
 
 /**
  * 进入编辑状态
  * @param this - gText
  */
-export function onEdit (this: SVGGElement, _e: MouseEvent, d: Mdata): void {
+export function onEdit(this: SVGGElement, _e: MouseEvent, d: Mdata): void {
   const gNode = this.parentNode?.parentNode as SVGGElement
   const { foreign } = selection
   if (editFlag && foreign && foreignDivEle.value) {
@@ -160,7 +161,7 @@ export const onClickMenu = (name: MenuEvent): void => {
 /**
  * 添加子节点并进入编辑模式
  */
- export const addAndEdit = (e: MouseEvent, d: Mdata): void => {
+export const addAndEdit = (e: MouseEvent, d: Mdata): void => {
   const child = add(d.id, '')
   if (child) { edit(child, e) }
 }
@@ -168,7 +169,7 @@ export const onClickMenu = (name: MenuEvent): void => {
 /**
  * 选中节点进入编辑模式
  */
-export function edit (d: Mdata, e = new MouseEvent('click')): void {
+export function edit(d: Mdata, e = new MouseEvent('click')): void {
   const { g } = selection
   if (!g) { return }
   const gText = g.selectAll<SVGGElement, Mdata>(`g[data-id='${getDataId(d)}'] > g.${style.content} > g.${style.text}`)
@@ -187,7 +188,7 @@ export const onClickExpandBtn = (e: MouseEvent, d: Mdata): void => {
 /**
  * @param this - gText
  */
-export function onDragMove (this: SVGGElement, e: d3.D3DragEvent<SVGGElement, Mdata, Mdata>, d: Mdata): void {
+export function onDragMove(this: SVGGElement, e: d3.D3DragEvent<SVGGElement, Mdata, Mdata>, d: Mdata): void {
   const gNode = this.parentNode?.parentNode as SVGGElement
   if (svgEle.value) { svgEle.value.classList.add(style.dragging) }
   const { g } = selection
@@ -224,7 +225,7 @@ export function onDragMove (this: SVGGElement, e: d3.D3DragEvent<SVGGElement, Md
 /**
  * @param this - gText
  */
-export function onDragEnd (this: SVGGElement, e: d3.D3DragEvent<SVGGElement, Mdata, Mdata>, d: Mdata): void {
+export function onDragEnd(this: SVGGElement, e: d3.D3DragEvent<SVGGElement, Mdata, Mdata>, d: Mdata): void {
   const gNode = this.parentNode?.parentNode as SVGGElement
   if (svgEle.value) { svgEle.value.classList.remove(style.dragging) }
   // 判断是否找到了新的父节点

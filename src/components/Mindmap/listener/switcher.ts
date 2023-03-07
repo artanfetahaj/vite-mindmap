@@ -26,15 +26,11 @@ export const switchEdit = (editable: boolean): void => {
   }
 }
 
-export const switchSelect = (selectable: boolean): void => {
+export const switchSelect = (): void => {
   const { g } = selection
   if (!g) { return }
   const gText = g.selectAll<SVGGElement, Mdata>(`g.${style.text}`)
-  if (selectable) {
-    gText.on('mousedown', onSelect)
-  } else {
-    gText.on('mousedown', null)
-  }
+  gText.on('mousedown', onSelect)
 }
 
 export const switchContextmenu = (val: boolean): void => {
