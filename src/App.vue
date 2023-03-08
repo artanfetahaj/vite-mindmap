@@ -54,8 +54,8 @@ export default defineComponent({
       'add-node-btn': { value: true },
       keyboard: { value: false, disabled: true },
       zoom: { value: true },
-      drag: { value: true },
-      edit: { value: true },
+      drag: { value: false },
+      edit: { value: false },
       contextmenu: { value: true },
       'sharp-corner': { value: false },
       vertical: { value: false, disabled: true }
