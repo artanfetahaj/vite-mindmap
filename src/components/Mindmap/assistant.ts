@@ -74,13 +74,13 @@ export const getRelativePos = (wrapper: HTMLElement, e: MouseEvent): { left: num
 /**
  * @param this - gText
  */
-export function getDragContainer (this: SVGGElement): SVGGElement {
+export function getDragContainer(this: SVGGElement): SVGGElement {
   return this.parentNode?.parentNode?.parentNode as SVGGElement
 }
 
-export function selectGNode (d: SVGGElement): void
-export function selectGNode (d: Mdata): void
-export function selectGNode (d: SVGGElement | Mdata): void {
+export function selectGNode(d: SVGGElement): void
+export function selectGNode(d: Mdata): void
+export function selectGNode(d: SVGGElement | Mdata): void {
   const ele = d instanceof SVGGElement ? d : document.querySelector<SVGGElement>(`g[data-id='${getDataId(d)}']`)
   const oldSele = document.getElementsByClassName(style.selected)[0]
   if (ele) {
@@ -99,7 +99,7 @@ export function selectGNode (d: SVGGElement | Mdata): void {
   }
 }
 
-export function getSelectedGData (): Mdata {
+export function getSelectedGData(): Mdata {
   const sele = d3.select<SVGGElement, Mdata>(`.${style.selected}`)
   return sele.data()[0]
 }
@@ -143,12 +143,12 @@ export const centerView = (): void => {
 /**
  * 缩放至合适大小并移动至全部可见
  */
-export const fitView = (): void => {
+export const fitView = (n: number = 1): void => {
   const { svg } = selection
   if (!svg || !gEle.value || !svgEle.value) { return }
   const gBB = gEle.value.getBBox()
   const svgBCR = svgEle.value.getBoundingClientRect()
-  const multiple = Math.min(svgBCR.width / gBB.width, svgBCR.height / gBB.height)
+  const multiple = Math.min(svgBCR.width / gBB.width, svgBCR.height / gBB.height) / n
   const svgCenter = { x: svgBCR.width / 2, y: svgBCR.height / 2 }
   // after scale
   const gCenter = { x: gBB.width * multiple / 2, y: gBB.height * multiple / 2 }
@@ -182,7 +182,7 @@ export const moveView = (ele: Element): void => {
     if (gBCR.width > width || gRight > width) { x1 = -(gRight - width) / k - space }
 
     if (gTop < 0) { y1 = -gTop / k + space }
-    if (gBCR.height > height || gBottom > height) { y1 = -(gBottom - height) / k - space}
+    if (gBCR.height > height || gBottom > height) { y1 = -(gBottom - height) / k - space }
 
     zoom.translateBy(svg, x1, y1)
   }

@@ -10,7 +10,7 @@
       :drag="checkboxList['drag'].value" :edit="checkboxList['edit'].value"
       :add-node-btn="checkboxList['add-node-btn'].value" :sharp-corner="checkboxList['sharp-corner'].value"
       :ctm="checkboxList['contextmenu'].value" :timetravel="checkboxList['timetravel'].value"
-      @update:model-value="onChange" @select="onSelect" :locale="locale" />
+      @update:model-value="onChange" @select="onSelect" :locale="locale" :defalutScale="1.1" />
     <div class="right-bottom">
       <div>
         <label for="language-select">Language</label>

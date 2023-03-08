@@ -63,6 +63,7 @@ export default defineComponent({
       type: Object as PropType<TwoNumber>,
       default: scaleExtent
     },
+    defalutScale: Number,
     sharpCorner: Boolean,
     // 操作许可
     centerBtn: Boolean,
@@ -108,7 +109,7 @@ export default defineComponent({
       const { svg, foreign } = selection
       foreign?.raise()
       bindForeignDiv()
-      fitView()
+      fitView(props.defalutScale)
       // mousedown与drag/zoom绑定的先后顺序会有影响
       svg?.on('mousedown', () => {
         const oldSele = document.getElementsByClassName(style.selected)[0]
