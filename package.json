@@ -1,17 +1,17 @@
 {
-  "name": "vue3-mindmap",
+  "name": "vite-mindmap",
   "description": "Mindmap component for Vue3",
   "author": "伍鑫",
   "license": "MIT",
   "files": [
     "dist"
   ],
-  "main": "./dist/vue3-mindmap.umd.js",
-  "module": "./dist/vue3-mindmap.es.js",
+  "main": "./dist/vite-mindmap.umd.js",
+  "module": "./dist/vite-mindmap.es.js",
   "exports": {
     ".": {
-      "import": "./dist/vue3-mindmap.es.js",
-      "require": "./dist/vue3-mindmap.umd.js"
+      "import": "./dist/vite-mindmap.es.js",
+      "require": "./dist/vite-mindmap.umd.js"
     },
     "./dist/style.css": "./dist/style.css"
   },
@@ -71,9 +71,9 @@
     "vite": "^2.3.0"
   },
   "bugs": {
-    "url": "https://github.com/hellowuxin/vue3-mindmap/issues"
+    "url": "https://github.com/weijiatan456/vite-mindmap/issues"
   },
-  "homepage": "https://github.com/hellowuxin/vue3-mindmap#readme",
+  "homepage": "https://github.com/weijiatan456/vite-mindmap#readme",
   "keywords": [
     "mindmap",
     "vue",
@@ -81,6 +81,6 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/hellowuxin/vue3-mindmap.git"
+    "url": "git+https://github.com/weijiatan456/vite-mindmap.git"
   }
 }

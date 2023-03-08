@@ -1,3 +1,8 @@
+/*
+ * @Author: jiatan_wei
+ * @Description: 
+ * @Date: 2023-02-24 16:04:08
+ */
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import path from 'path'
@@ -11,7 +16,7 @@ export default defineConfig({
     ]
   },
   plugins: [vue()],
-  base: '/vue3-mindmap/',
+  base: '/vite-mindmap/',
   build: {
     outDir: 'docs'
   },

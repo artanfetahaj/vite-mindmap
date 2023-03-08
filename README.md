@@ -1,18 +1,22 @@
-# vue3-mindmap
+# vite-mindmap
 
-[![npm](https://img.shields.io/npm/v/vue3-mindmap)](https://www.npmjs.com/package/vue3-mindmap)
-[![build](https://github.com/hellowuxin/vue3-mindmap/actions/workflows/blank.yml/badge.svg)](https://github.com/hellowuxin/vue3-mindmap/actions)
-[![coveralls](https://img.shields.io/coveralls/github/hellowuxin/vue3-mindmap)](https://coveralls.io/github/hellowuxin/vue3-mindmap)
+[![npm](https://img.shields.io/npm/v/vite-mindmap)](https://www.npmjs.com/package/vite-mindmap)
 
 > Mindmap component for Vue3 inspired by [MindNode](https://mindnode.com)
 
 [live demo / 演示页面](https://5xin.xyz/vue3-mindmap)  
 [Directory Description / 目录说明](./Directory.md)
 
+## 原项目地址
+
+```sh
+https://www.npmjs.com/package/vue3-mindmap
+```
+
 ## Install
 
 ```sh
-npm install vue3-mindmap
+npm install vite-mindmap
 ```
 
 ## PROPS
@@ -36,6 +40,13 @@ npm install vue3-mindmap
 | ctm          | Boolean                  | false      | 是否响应右键菜单        |
 | locale       | 'zh' \| 'en' \| 'ptBR'   | 'zh'       | i18n                  |
 
+## 事件
+
+| Name         | Description          |
+| ---          | ---                  |
+| @update:model-value      | 变化后的数据        |
+| @select      | 选中的回调事件        |
+
 ## Example
 
 ```html
@@ -44,8 +55,8 @@ npm install vue3-mindmap
 </template>
 
 <script>
-import mindmap from 'vue3-mindmap'
-import 'vue3-mindmap/dist/style.css'
+import mindmap from 'vite-mindmap'
+import 'vite-mindmap/dist/style.css'
 
 export default defineComponent({
   components: { mindmap },
