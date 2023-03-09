@@ -67,10 +67,10 @@ export default defineComponent({
     })
     const data = ref(learn)
     const onChange = (msg: any) => {
-      console.log(msg)
+      // console.log(msg)
     }
     const onSelect = (msg: any) => {
-      console.log(msg)
+      // console.log(msg)
     }
     const locale = ref<Locale>('zh')
 
@@ -153,6 +153,11 @@ input:disabled {
 
   text {
     fill: #fff;
+    font-size: 12px;
+
+    :first-child {
+      font-size: 16px;
+    }
   }
 }
 </style>
