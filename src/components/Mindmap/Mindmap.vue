@@ -12,7 +12,7 @@
     <svg ref="asstSvgEle" :class="style['asst-svg']"></svg>
     <div :class="[style['button-list'], style['right-bottom']]">
       <button v-if="centerBtn" @click="centerView()"><i :class="style['gps']"></i></button>
-      <button v-if="fitBtn" @click="fitView()"><i :class="style['fit']"></i></button>
+      <button v-if="fitBtn" @click="fitView(defalutScale)"><i :class="style['fit']"></i></button>
       <button v-if="downloadBtn" @click="download()"><i :class="style['download']"></i></button>
     </div>
     <div v-if="timetravel" :class="[style['button-list'], style['right-top']]">

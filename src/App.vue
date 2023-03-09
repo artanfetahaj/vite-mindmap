@@ -55,14 +55,14 @@ export default defineComponent({
       keyboard: { value: false, disabled: true },
       zoom: { value: true },
       drag: { value: false },
-      edit: { value: false },
+      edit: { value: true },
       contextmenu: { value: true },
       'sharp-corner': { value: false },
       vertical: { value: false, disabled: true }
     })
     const rangeList = reactive({
       branch: { value: 2, min: 1, max: 6 },
-      'x-gap': { value: 84, min: 0, max: 100 },
+      'x-gap': { value: 84, min: 0, max: 200 },
       'y-gap': { value: 18, min: 0, max: 100 }
     })
     const data = ref(learn)

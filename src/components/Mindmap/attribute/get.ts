@@ -67,7 +67,7 @@ export const getPath = (d: Mdata): string => {
   return `${link({ source, target })}L${w},${target[1]}`
 }
 export const getAddBtnTransform = (d: Mdata, trp: number): string => {
-  const y = d.depth === 0 ? d.height / 2 : d.height + getYOffset()
+  const y = d.depth === 0 ? d.height / 2 : d.height + getYOffset() - 4
   let x = d.width + trp + addBtnSide / 2 + addBtnRect.margin
   if (d.left) { x = -x }
   return `translate(${x},${y})`

@@ -45,7 +45,7 @@ export const rootTextRectPadding = 10
 export let yGap = 18
 export let xGap = 84
 export let textRectPadding = Math.min(yGap / 2 - 1, rootTextRectPadding)
-emitter.on<{ xGap: number, yGap: number}>('gap', (gap) => {
+emitter.on<{ xGap: number, yGap: number }>('gap', (gap) => {
   if (!gap) { return }
   xGap = gap.xGap
   yGap = gap.yGap
@@ -72,7 +72,7 @@ export const observer = new ResizeObserver((arr: ResizeObserverEntry[]) => {
 })
 
 // 其他
-export const addBtnRect = { side: 12, padding: 2, margin: 8 }
+export const addBtnRect = { side: 10, padding: 4, margin: 3 }
 export const addBtnSide = addBtnRect.side + addBtnRect.padding * 2
 export const expandBtnRect = { width: 16, height: 4, radius: 2 }
 export const zoomTransform: Ref<d3.ZoomTransform> = ref(d3.zoomIdentity)
