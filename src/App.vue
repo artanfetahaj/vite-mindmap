@@ -153,10 +153,14 @@ input:disabled {
 
   text {
     fill: #fff;
-    font-size: 12px;
 
-    :first-child {
-      font-size: 16px;
+    .l2{
+      fill: #63ff63;
+      font-size: 12px;
+    }
+    .l3{
+      fill: #ff8585;
+      font-size: 12px;
     }
   }
 }
