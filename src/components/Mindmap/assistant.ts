@@ -143,7 +143,7 @@ export const centerView = (): void => {
 /**
  * 缩放至合适大小并移动至全部可见
  */
-export const fitView = (n: number = 1): void => {
+export const fitView = (n: number = 1.1): void => {
   const { svg } = selection
   if (!svg || !gEle.value || !svgEle.value) { return }
   const gBB = gEle.value.getBBox()
