@@ -119,6 +119,12 @@ export default defineComponent({
       switchContextmenu(props.ctm)
     })
     // watch
+    watch(() => props.modelValue, () => {
+      emitter.emit('mmdata', new ImData(cloneDeep(props.modelValue[0]), xGap, yGap, getSize))
+      draw()
+    }, {
+      deep: true
+    })
     watch(() => [props.branch, addNodeBtn.value, props.sharpCorner], () => {
       draw()
       changeSharpCorner.value = false
