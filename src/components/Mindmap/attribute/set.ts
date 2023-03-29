@@ -43,7 +43,7 @@ export const attrTspan = (tspan: d3.Selection<SVGTSpanElement, TspanData, SVGTex
     .text((d) => d.name || ' ')
     .attr('x', 0)
     .attr('dy', (d, i) => i ? d.height : 0)
-    .attr('class', (d) => d.name.indexOf('A：') == 0 ? 'l2' : d.name.indexOf('Q：') == 0 ? 'l3' : 'l1')
+    .attr('class', (d) => (d.name.indexOf('A：') == 0 || d.name.indexOf('B：') == 0 || d.name.indexOf('C：') == 0 || d.name.indexOf('D：') == 0 || d.name.indexOf('E：') == 0 || d.name.indexOf('F：') == 0 || d.name.indexOf('G：') == 0 || d.name.indexOf('H：') == 0 || d.name.indexOf('I：') == 0 || d.name.indexOf('J：') == 0 || d.name.indexOf('K：') == 0 || d.name.indexOf('L：') == 0 || d.name.indexOf('M：') == 0 || d.name.indexOf('N：') == 0) ? 'l2' : d.name.indexOf('Q：') == 0 ? 'l3' : 'l1')
 }
 
 export const attrAddBtnRect = (rect: SelectionRect): void => {
