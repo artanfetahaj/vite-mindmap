@@ -90,7 +90,7 @@ export default defineComponent({
     watchEffect(() => emitter.emit('gap', { xGap: props.xGap, yGap: props.yGap }))
     watchEffect(() => emitter.emit('mindmap-context', context))
     watchEffect(() => addNodeBtn.value = props.edit && props.addNodeBtn)
-    watchEffect(() => extraNodeBtn.value = props.extra && props.extraNodeBtn)
+    watchEffect(() => extraNodeBtn.value = props.extra)
     watchEffect(() => mmprops.value.drag = props.drag)
     watchEffect(() => mmprops.value.edit = props.edit)
     watchEffect(() => mmprops.value.extra = props.extra)
@@ -136,6 +136,7 @@ export default defineComponent({
       draw()
       changeSharpCorner.value = false
     })
+
     watch(() => [props.xGap, props.yGap], (val) => {
       mmdata.setBoundingBox(val[0], val[1])
       draw()

@@ -133,6 +133,11 @@ const updateNode = (update: SelectionG) => {
   } else {
     gAddBtn.remove()
   }
+  if (extraNodeBtn.value) {
+    if (!gExtraBtn.node()) { gExtraBtn = appendAndBindExtraBtn(gContent) }
+  } else {
+    gExtraBtn.remove()
+  }
 
   attrA(isRoot, gTrigger, gTextRect, gExpandBtn, gAddBtn, gExtraBtn)
 
