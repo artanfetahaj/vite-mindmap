@@ -167,6 +167,13 @@ export const addAndEdit = (e: MouseEvent, d: Mdata): void => {
 }
 
 /**
+ * 额外添加的按钮
+ */
+export const extraAndEdit = (e: MouseEvent, d: Mdata): void => {
+  emitter.emit('choose', d)
+}
+
+/**
  * 选中节点进入编辑模式
  */
 export function edit(d: Mdata, e = new MouseEvent('click')): void {

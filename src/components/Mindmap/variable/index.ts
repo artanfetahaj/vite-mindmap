@@ -74,14 +74,18 @@ export const observer = new ResizeObserver((arr: ResizeObserverEntry[]) => {
 // 其他
 export const addBtnRect = { side: 10, padding: 4, margin: 3 }
 export const addBtnSide = addBtnRect.side + addBtnRect.padding * 2
+export const extraBtnRect = { side: 10, padding: 4, margin: 3 }
+export const extraBtnSide = extraBtnRect.side + extraBtnRect.padding * 2
 export const expandBtnRect = { width: 16, height: 4, radius: 2 }
 export const zoomTransform: Ref<d3.ZoomTransform> = ref(d3.zoomIdentity)
 export const zoom = d3.zoom<SVGSVGElement, null>().on('zoom', onZoomMove).scaleExtent(scaleExtent)
 export const drag = d3.drag<SVGGElement, Mdata>().container(getDragContainer).on('drag', onDragMove).on('end', onDragEnd)
 export const addNodeBtn = ref(false)
+export const extraNodeBtn = ref(false)
 export let mmcontext: SetupContext
 emitter.on<SetupContext>('mindmap-context', (val) => val ? mmcontext = val : null)
 export const mmprops = ref({
   drag: false,
-  edit: false
+  edit: false,
+  extra: false
 })

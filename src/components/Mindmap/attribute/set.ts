@@ -1,7 +1,7 @@
 import { IsMdata, Mdata, SelectionCircle, SelectionG, SelectionRect, Transition, TspanData } from '../interface'
 import * as d3 from '../d3'
-import { addBtnRect, addBtnSide, branch, changeSharpCorner, expandBtnRect, rootTextRectPadding, rootTextRectRadius, textRectPadding } from '../variable'
-import { getAddBtnClass, getAddBtnTransform, getDataId, getExpandBtnTransform, getGClass, getGTransform, getPath } from './get'
+import { extraBtnRect, extraBtnSide, addBtnRect, addBtnSide, branch, changeSharpCorner, expandBtnRect, rootTextRectPadding, rootTextRectRadius, textRectPadding } from '../variable'
+import { getAddBtnClass, getAddBtnTransform, getExtraBtnClass, getExtraBtnTransform, getDataId, getExpandBtnTransform, getGClass, getGTransform, getPath } from './get'
 import style from '../css'
 
 /**
@@ -12,18 +12,21 @@ export const attrA = (
   gTrigger: SelectionRect,
   gTextRect: SelectionRect,
   gExpandBtn: SelectionG,
-  gAddBtn?: SelectionG
+  gAddBtn?: SelectionG,
+  gExtraBtn?: SelectionG
 ): void => {
   if (isRoot) {
     attrTrigger(gTrigger, rootTextRectPadding)
     attrTextRect(gTextRect, rootTextRectPadding, rootTextRectRadius)
     attrExpandBtn(gExpandBtn, rootTextRectPadding)
     if (gAddBtn) { attrAddBtn(gAddBtn, rootTextRectPadding) }
+    if (gExtraBtn) { attrExtraBtn(gExtraBtn, rootTextRectPadding) }
   } else {
     attrTrigger(gTrigger, textRectPadding)
     attrTextRect(gTextRect, textRectPadding)
     attrExpandBtn(gExpandBtn, textRectPadding)
     if (gAddBtn) { attrAddBtn(gAddBtn, textRectPadding) }
+    if (gExtraBtn) { attrExtraBtn(gExtraBtn, textRectPadding) }
   }
 }
 
@@ -48,6 +51,13 @@ export const attrTspan = (tspan: d3.Selection<SVGTSpanElement, TspanData, SVGTex
 
 export const attrAddBtnRect = (rect: SelectionRect): void => {
   const { side, padding } = addBtnRect
+  const radius = 4
+  const temp0 = -padding - side / 2
+  const temp1 = side + padding * 2
+  rect.attr('x', temp0).attr('y', temp0).attr('rx', radius).attr('ry', radius).attr('width', temp1).attr('height', temp1)
+}
+export const attrExtraBtnRect = (rect: SelectionRect): void => {
+  const { side, padding } = extraBtnRect
   const radius = 4
   const temp0 = -padding - side / 2
   const temp1 = side + padding * 2
@@ -82,6 +92,9 @@ export const attrExpandBtn = (g: SelectionG, trp: number): void => {
 
 export const attrAddBtn = (g: SelectionG, trp: number): void => {
   g.attr('class', (d) => getAddBtnClass(d).join(' ')).attr('transform', (d) => getAddBtnTransform(d, trp))
+}
+export const attrExtraBtn = (g: SelectionG, trp: number): void => {
+  g.attr('class', (d) => getExtraBtnClass(d).join(' ')).attr('transform', (d) => getExtraBtnTransform(d, trp))
 }
 
 export const attrTrigger = (rect: SelectionRect, padding: number): void => {

@@ -32,7 +32,7 @@ import * as d3 from './d3'
 import { afterOperation, ImData, mmdata } from './data'
 import { hasNext, hasPrev } from './state'
 import { fitView, getSize, centerView, next, prev, download, bindForeignDiv } from './assistant'
-import { xGap, yGap, branch, scaleExtent, ctm, selection, changeSharpCorner, addNodeBtn, mmprops } from './variable'
+import { xGap, yGap, branch, scaleExtent, ctm, selection, changeSharpCorner, addNodeBtn, extraNodeBtn, mmprops } from './variable'
 import { wrapperEle, svgEle, gEle, asstSvgEle, foreignEle, foreignDivEle } from './variable/element'
 import { draw } from './draw'
 import { switchZoom, switchEdit, switchSelect, switchContextmenu, switchDrag, onClickMenu } from './listener'
@@ -45,7 +45,7 @@ export default defineComponent({
   components: {
     Contextmenu
   },
-  emits: ['update:modelValue', 'select'],
+  emits: ['update:modelValue', 'select', 'choose'],
   props: {
     modelValue: {
       type: Array as PropType<Data[]>,
@@ -71,8 +71,10 @@ export default defineComponent({
     downloadBtn: Boolean,
     timetravel: Boolean,
     addNodeBtn: Boolean,
+    extraNodeBtn: Boolean,
     edit: Boolean,
     drag: Boolean,
+    extra: Boolean,
     keyboard: Boolean,
     ctm: Boolean,
     zoom: Boolean,
@@ -88,11 +90,16 @@ export default defineComponent({
     watchEffect(() => emitter.emit('gap', { xGap: props.xGap, yGap: props.yGap }))
     watchEffect(() => emitter.emit('mindmap-context', context))
     watchEffect(() => addNodeBtn.value = props.edit && props.addNodeBtn)
+    watchEffect(() => extraNodeBtn.value = props.extra && props.extraNodeBtn)
     watchEffect(() => mmprops.value.drag = props.drag)
     watchEffect(() => mmprops.value.edit = props.edit)
+    watchEffect(() => mmprops.value.extra = props.extra)
     watchEffect(() => {
       emitter.on('select', (val) => {
         context.emit('select', val)
+      })
+      emitter.on('choose', (val) => {
+        context.emit('choose', val)
       })
     })
     // onMounted
@@ -125,7 +132,7 @@ export default defineComponent({
     }, {
       deep: true
     })
-    watch(() => [props.branch, addNodeBtn.value, props.sharpCorner], () => {
+    watch(() => [props.branch, addNodeBtn.value, extraNodeBtn.value, props.sharpCorner], () => {
       draw()
       changeSharpCorner.value = false
     })
@@ -133,7 +140,7 @@ export default defineComponent({
       mmdata.setBoundingBox(val[0], val[1])
       draw()
     })
-    watch(() => [props.drag, props.edit], (val) => {
+    watch(() => [props.drag, props.edit, props.extra], (val) => {
       switchSelect()
       switchDrag(val[0])
       switchEdit(val[1])

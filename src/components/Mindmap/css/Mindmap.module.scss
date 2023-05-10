@@ -74,6 +74,22 @@ $seleColor: rgba($color: blue, $alpha: 0.15);
     }
   }
 
+  .extra-btn {
+    &.hidden {
+      visibility: hidden;
+    }
+
+    rect {
+      stroke-width: 1;
+      stroke: grey;
+      fill: white;
+    }
+
+    path {
+      fill: #8685ff
+    }
+  }
+
   .expand-btn {
     visibility: hidden;
 

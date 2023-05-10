@@ -17,6 +17,7 @@ declare const style: {
   readonly outline: string
   readonly download: string
   readonly 'add-btn': string
+  readonly 'extra-btn': string
   readonly 'hidden': string
   readonly 'expand-btn': string
   readonly 'collapse': string

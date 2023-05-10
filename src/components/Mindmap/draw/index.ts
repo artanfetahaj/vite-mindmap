@@ -1,10 +1,10 @@
 import { TspanData, Mdata, SelectionG, IsMdata } from '@/components/Mindmap/interface'
 import * as d3 from '../d3'
-import { attrA, attrAddBtnRect, attrExpandBtnCircle, attrExpandBtnRect, attrG, attrPath, attrText, attrTspan, getSiblingGClass, getTspanData } from '../attribute'
+import { attrA, attrAddBtnRect, attrExtraBtnRect, attrExpandBtnCircle, attrExpandBtnRect, attrG, attrPath, attrText, attrTspan, getSiblingGClass, getTspanData } from '../attribute'
 import { getAddPath, makeTransition } from '../assistant'
-import { addBtnRect, addNodeBtn, drag, mmprops, selection } from '../variable'
+import { addBtnRect, addNodeBtn, extraNodeBtn, drag, mmprops, selection } from '../variable'
 import { mmdata } from '../data'
-import { addAndEdit, onClickExpandBtn, onEdit, onMouseEnter, onMouseLeave, onSelect } from '../listener'
+import { addAndEdit, extraAndEdit, onClickExpandBtn, onEdit, onMouseEnter, onMouseLeave, onSelect } from '../listener'
 import style from '../css'
 
 export const appendTspan = (
@@ -28,11 +28,24 @@ export const appendAddBtn = (g: SelectionG): d3.Selection<SVGGElement, Mdata, SV
   gAddBtn.append('path').attr('d', getAddPath(2, addBtnRect.side))
   return gAddBtn
 }
-
 const appendAndBindAddBtn = (g: SelectionG) => {
   const gAddBtn = appendAddBtn(g)
   gAddBtn.on('click', addAndEdit)
   return gAddBtn
+}
+
+export const appendExtraBtn = (g: SelectionG): d3.Selection<SVGGElement, Mdata, SVGGElement, IsMdata> => {
+  const gExtraBtn = g.append('g')
+  attrExtraBtnRect(gExtraBtn.append('rect'))
+  attrExpandBtnCircle(gExtraBtn.append('circle'), -4)
+  attrExpandBtnCircle(gExtraBtn.append('circle'), 0)
+  attrExpandBtnCircle(gExtraBtn.append('circle'), 4)
+  return gExtraBtn
+}
+const appendAndBindExtraBtn = (g: SelectionG) => {
+  const gExtraBtn = appendExtraBtn(g)
+  gExtraBtn.on('click', extraAndEdit)
+  return gExtraBtn
 }
 
 export const appendExpandBtn = (g: SelectionG): d3.Selection<SVGGElement, Mdata, SVGGElement, IsMdata> => {
@@ -79,10 +92,14 @@ const appendNode = (enter: d3.Selection<d3.EnterElement, Mdata, SVGGElement, IsM
   // 绘制添加按钮
   let gAddBtn
   if (addNodeBtn.value) { gAddBtn = appendAndBindAddBtn(gContent) }
+
+  // 拓展按钮
+  let gExtraBtn = appendAndBindExtraBtn(gContent)
+
   // 绘制折叠按钮
   const gExpandBtn = appendExpandBtn(gContent)
 
-  attrA(isRoot, gTrigger, gTextRect, gExpandBtn, gAddBtn)
+  attrA(isRoot, gTrigger, gTextRect, gExpandBtn, gAddBtn, gExtraBtn)
 
   bindEvent(enterG, isRoot)
 
@@ -109,6 +126,7 @@ const updateNode = (update: SelectionG) => {
     .data(getTspanData)
     .join(appendTspan, updateTspan, exit => exit.remove())
   let gAddBtn = gContent.select<SVGGElement>(`g.${style['add-btn']}`)
+  let gExtraBtn = gContent.select<SVGGElement>(`g.${style['extra-btn']}`)
   const gExpandBtn = gContent.select<SVGGElement>(`g.${style['expand-btn']}`)
   if (addNodeBtn.value) {
     if (!gAddBtn.node()) { gAddBtn = appendAndBindAddBtn(gContent) }
@@ -116,7 +134,7 @@ const updateNode = (update: SelectionG) => {
     gAddBtn.remove()
   }
 
-  attrA(isRoot, gTrigger, gTextRect, gExpandBtn, gAddBtn)
+  attrA(isRoot, gTrigger, gTextRect, gExpandBtn, gAddBtn, gExtraBtn)
 
   update.each((d, i) => {
     if (!d.children) { return }

@@ -4,13 +4,26 @@
       <a href="https://github.com/hellowuxin/vue3-mindmap" target="_blank">GitHub</a>
     </div>
     <div class="right-top"><span>Props</span></div>
-    <mindmap class="left-bottom" v-model="data" :branch="rangeList['branch'].value" :x-gap="rangeList['x-gap'].value"
-      :y-gap="rangeList['y-gap'].value" :zoom="checkboxList['zoom'].value" :fit-btn="checkboxList['fit-btn'].value"
-      :center-btn="checkboxList['center-btn'].value" :download-btn="checkboxList['download-btn'].value"
-      :drag="checkboxList['drag'].value" :edit="checkboxList['edit'].value"
-      :add-node-btn="checkboxList['add-node-btn'].value" :sharp-corner="checkboxList['sharp-corner'].value"
-      :ctm="checkboxList['contextmenu'].value" :timetravel="checkboxList['timetravel'].value"
-      @update:model-value="onChange" @select="onSelect" :locale="locale" :defalutScale="1.1" />
+    <mindmap class="left-bottom" 
+      v-model="data" 
+      :branch="rangeList['branch'].value" 
+      :x-gap="rangeList['x-gap'].value"
+      :y-gap="rangeList['y-gap'].value" 
+      :zoom="checkboxList['zoom'].value" 
+      :fit-btn="checkboxList['fit-btn'].value"
+      :center-btn="checkboxList['center-btn'].value" 
+      :download-btn="checkboxList['download-btn'].value"
+      :drag="checkboxList['drag'].value" 
+      :edit="checkboxList['edit'].value" 
+      :extra="checkboxList['extra'].value" 
+      :add-node-btn="checkboxList['add-node-btn'].value" 
+      :sharp-corner="checkboxList['sharp-corner'].value"
+      :ctm="checkboxList['contextmenu'].value" 
+      :timetravel="checkboxList['timetravel'].value"
+      @update:model-value="onChange" 
+      @select="onSelect" 
+      @choose="onChoose"
+      :locale="locale" :defalutScale="1.1" />
     <div class="right-bottom">
       <div>
         <label for="language-select">Language</label>
@@ -55,7 +68,8 @@ export default defineComponent({
       keyboard: { value: false, disabled: true },
       zoom: { value: true },
       drag: { value: false },
-      edit: { value: true },
+      edit: { value: false },
+      extra: { value: true },
       contextmenu: { value: true },
       'sharp-corner': { value: false },
       vertical: { value: false, disabled: true }
@@ -72,6 +86,9 @@ export default defineComponent({
     const onSelect = (msg: any) => {
       // console.log(msg)
     }
+    const onChoose = (msg: any) => {
+      console.log(msg)
+    }
     const locale = ref<Locale>('zh')
 
     return {
@@ -80,6 +97,7 @@ export default defineComponent({
       rangeList,
       onChange,
       onSelect,
+      onChoose,
       locale
     }
   }

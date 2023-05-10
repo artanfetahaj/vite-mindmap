@@ -28,6 +28,13 @@ export const getAddBtnClass = (d: Mdata): string[] => {
   }
   return arr
 }
+export const getExtraBtnClass = (d: Mdata): string[] => {
+  const arr = [style['extra-btn']]
+  if (d.collapse) {
+    arr.push(style['hidden'])
+  }
+  return arr
+}
 export const getGTransform = (d: Mdata): string => { return `translate(${d.dx + d.px},${d.dy + d.py})` }
 export const getDataId = (d: Mdata): string => { return d.id }
 export const getTspanData = (d: Mdata): TspanData[] => {
@@ -68,6 +75,12 @@ export const getPath = (d: Mdata): string => {
 }
 export const getAddBtnTransform = (d: Mdata, trp: number): string => {
   const y = d.depth === 0 ? d.height / 2 : d.height + getYOffset() - 4
+  let x = d.width + trp + addBtnSide / 2 + addBtnRect.margin
+  if (d.left) { x = -x }
+  return `translate(${x},${y})`
+}
+export const getExtraBtnTransform = (d: Mdata, trp: number): string => {
+  const y = d.depth === 0 ? d.height / 2 : d.height + getYOffset() - d.height / 2 - 2
   let x = d.width + trp + addBtnSide / 2 + addBtnRect.margin
   if (d.left) { x = -x }
   return `translate(${x},${y})`
